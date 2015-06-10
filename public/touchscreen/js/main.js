@@ -47,14 +47,15 @@ requirejs.config({
 });
 
 require(
-['map', 'poi', 'photospheres', 'viewsync', 'zoom', 'activities'],
+['map', 'poi', 'photospheres', 'viewsync', 'zoom', 'activities', 'panoinfo'],
 function(
   MapModule,
   POIModule,
   PhotoSpheresModule,
   ViewSyncModule,
   ZoomModule,
-  ActivitiesModule
+  ActivitiesModule,
+  InfoModule
 ) {
 
   document.body.style['font-size'] = config.touchscreen.font_scale + 'em';
@@ -73,6 +74,11 @@ function(
     document.getElementById('activities-template')
   );
 
+  if (config.touchscreen.show_infobox) {
+    var info_box = new InfoModule();
+    info_box.updateBox(config.display.default_pano);
+  }
+
   if (config.touchscreen.show_zoomctl) {
     var zoom_ctl = new ZoomModule();
 
@@ -88,6 +94,11 @@ function(
   viewsync.on('ready', function() {
     map.on('pano', function(panoid) {
       viewsync.sendPano(panoid);
+
+      if (config.touchscreen.show_infobox) {
+        info_box.updateBox(panoid);
+      }
+
     });
     map.on('meta', function(data) {
       viewsync.sendMeta(data);
@@ -96,6 +107,10 @@ function(
 
   viewsync.on('pano', function(panoid) {
     map.update_pano_by_id(panoid);
+
+    if (config.touchscreen.show_infobox) {
+      info_box.updateBox(panoid);
+    }
   });
 
   poi.on('add_location', function(loc) {
