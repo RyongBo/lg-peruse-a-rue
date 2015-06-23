@@ -37,7 +37,11 @@ function(config, L, Stapes, $, GMaps) {
     		  lng = lng.substr(0,6) + " East";
     		}
 
-	  		self.$pano_info.html(description + '<br>' + lat + '<br>' + lng + "<br>" + copyright);
+	  		if(copyright.search(description) < 0) {
+				self.$pano_info.html(description + '<br>' + lat + '<br>' + lng + "<br>" + copyright);
+	  		} else {
+	  			self.$pano_info.html(lat + '<br>' + lng + "<br>" + copyright);
+	  		}
 	  		self.$info_box.append(self.$pano_info);
 	  		$('body').append(self.$info_box);
 	  	  }
