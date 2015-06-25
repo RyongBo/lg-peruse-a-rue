@@ -101,6 +101,8 @@ function(config, L, Stapes, $, leftUI, doT) {
 
       $('.poi-item').each(function(index, item) {
         self.emit('add_location', $(item).attr('panoid'));
+        poiArray.push( {panoid: $(item).attr('panoid'),
+                        heading: $(item).attr('heading')} );
       });
 
       this._activate($('.poi-tab-inactive').first());

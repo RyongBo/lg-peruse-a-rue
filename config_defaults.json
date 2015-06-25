@@ -9,6 +9,8 @@
     "activities": [
       { "title": "Google Earth", "app": "earth" }
     ],
+    "random_mode": "WORLD",
+    "show_random_button": true,
     "show_infobox": true,
     "show_photospheres": true,
     "show_zoomctl": true,

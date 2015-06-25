@@ -46,8 +46,10 @@ requirejs.config({
   }
 });
 
+var poiArray = [];
+
 require(
-['map', 'poi', 'photospheres', 'viewsync', 'zoom', 'activities', 'panoinfo'],
+['map', 'poi', 'photospheres', 'viewsync', 'zoom', 'activities', 'panoinfo', 'random'],
 function(
   MapModule,
   POIModule,
@@ -55,7 +57,8 @@ function(
   ViewSyncModule,
   ZoomModule,
   ActivitiesModule,
-  InfoModule
+  InfoModule,
+  RandomModule
 ) {
 
   document.body.style['font-size'] = config.touchscreen.font_scale + 'em';
@@ -90,6 +93,18 @@ function(
       map.zoom_out();
     });
   }
+
+  if (config.touchscreen.show_random_button) {
+    var random_button = new RandomModule();
+  }
+
+  random_button.on('select_location', function(loc) {
+    map.select_pano_by_id(loc);
+  });
+
+  random_button.on('location_heading', function(hdg) {
+    viewsync.sendHdg(hdg);
+  });
 
   viewsync.on('ready', function() {
     map.on('pano', function(panoid) {
