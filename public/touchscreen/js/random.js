@@ -37,7 +37,7 @@ function(config, L, Stapes, $, GMaps) {
           var lat = ((Math.random() * 360) - 180).toFixed(3);
           var lng = ((Math.random() * 360) - 180).toFixed(3);
           var latLng = new google.maps.LatLng(lat ,lng);
-          self.sv_svc.getPanoramaByLocation(latLng, 30000, function(data, status) {
+          self.sv_svc.getPanoramaByLocation(latLng, 1000, function(data, status) {
               self.processLocSearch(self, data, status);
           });
         }
@@ -53,7 +53,7 @@ function(config, L, Stapes, $, GMaps) {
         var lat = ((Math.random() * 360) - 180).toFixed(3);
         var lng = ((Math.random() * 360) - 180).toFixed(3);
         latLng = new google.maps.LatLng(lat ,lng);
-        self.sv_svc.getPanoramaByLocation(latLng, 30000, function(data, status) {
+        self.sv_svc.getPanoramaByLocation(latLng, 1000, function(data, status) {
               self.processLocSearch(self, data, status);
           });
       }
